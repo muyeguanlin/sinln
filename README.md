@@ -6,9 +6,9 @@ git init
 git status
 git add .
 Remove-Item -Recurse -Force sinln\.git
-git commit -m "初始提交"
+git commit -m "origin"
 git remote add origin https://github.com/muyeguanlin/sinln.git
-git remote add gitee https://gitee.com/qq2390893447/myproject.git
+git remote add origin https://gitee.com/qq2390893447/myproject.git
 git commit -m "修复 Git 子仓库问题，添加所有项目文件"
 git push -u origin main
 
