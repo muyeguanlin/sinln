@@ -1,0 +1,14 @@
+[project]
+name = "src-py"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "pywebview>=6.1",
+    "waitress>=3.0.2",
+]
+
+[project.scripts]
+sinln = "src_py.main:main"

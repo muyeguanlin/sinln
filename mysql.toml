@@ -1,0 +1,36 @@
+# mysql.toml
+[database]
+host = "localhost"
+user = "root"
+password = "zst654321"
+db = "mysql"
+port = 3306
+charset = "utf8"
+autocommit = true
+
+[query]
+insert_image = """
+INSERT INTO baidu_images (image_name, image_url, keyword, local_path) 
+VALUES (%s, %s, %s, %s)
+ON DUPLICATE KEY UPDATE 
+    image_url = VALUES(image_url),
+    keyword = VALUES(keyword),
+    local_path = VALUES(local_path),
+    download_time = CURRENT_TIMESTAMP
+"""
+
+select_all = "SELECT * FROM baidu_images"
+
+delete_all = "DELETE FROM baidu_images"
+
+create_table = """
+CREATE TABLE IF NOT EXISTS baidu_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    image_name VARCHAR(255) NOT NULL,
+    image_url TEXT,
+    keyword VARCHAR(100),
+    download_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    local_path VARCHAR(500) DEFAULT '',
+    UNIQUE KEY unique_image (image_name)
+)
+"""

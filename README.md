@@ -10,5 +10,13 @@ This template should help get you started developing with Vue 3 and TypeScript i
 git config --global user.name "muyeguanlin"
 git config --global user.email "2390893447@qq.com"
 git init
+git status
+git add .
+git remote add origin https://github.com/muyeguanlin/sinln.git
+git push -u origin main
 
 ## 我们已经在项目根目录建立了本地仓库，因为用户已经执行了 git init，并且看到了提示：Initialized empty Git repository in F:/study251011/sinln/.git/
+
+## 检查上传文件
+
+git status

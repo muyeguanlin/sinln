@@ -1,0 +1,92 @@
+# # 查找 pybind11 的安装路径（通常位于 Python 的 site-packages 中）
+# python -c "import pybind11; print(pybind11.get_cmake_dir())"
+
+
+
+cmake_minimum_required(VERSION 3.10)  # CMake最低版本要求
+project(scraui)  # 项目名称
+
+# # 设置策略以消除警告
+# cmake_policy(SET CMP0148 NEW)####
+
+# # 设置 C++ 标准
+# set(CMAKE_CXX_STANDARD 17)####
+# set(CMAKE_CXX_STANDARD_REQUIRED ON)####
+
+# 设置 Python 路径
+# set(Python_EXECUTABLE "G:/python/python.exe")###
+# set(Python_INCLUDE_DIR "G:/python/include")###
+# set(Python_LIBRARY "G:/python/libs/python313.lib")###
+
+
+# 查找pybind11包#显式指定 pybind11 的路径
+set(pybind11_DIR "G:/python/Lib/site-packages/pybind11/share/cmake/pybind11")
+find_package(pybind11 REQUIRED)
+
+# # 设置 MySQL 路径
+# set(MYSQL_INCLUDE_DIR "C:/Program Files/MySQL/MySQL Server 8.0/include")###
+# set(MYSQL_LIB_DIR "C:/Program Files/MySQL/MySQL Server 8.0/lib")####
+
+# # 包含目录
+# include_directories(###
+#     ${Python_INCLUDE_DIR}####
+#     ${MYSQL_INCLUDE_DIR}###
+#     ${pybind11_INCLUDE_DIR}###
+# )
+
+# # 链接目录
+# link_directories(####
+#     ${MYSQL_LIB_DIR}####
+#     ${Python_LIBRARIES}####
+# )
+
+
+# # # 创建共享库，链接pybind11
+# pybind11_add_module(example example.cpp)
+# # # 确保在 Windows 下生成 .pyd 而不是 .dll
+# set_target_properties(example PROPERTIES SUFFIX ".pyd")
+# set(Python_LIBRARIES "G:/python/libs/python313.lib")
+# target_link_libraries(example PRIVATE ${Python_LIBRARIES})
+
+
+
+
+set(MODULE_NAME "example")  # 改为唯一的模块名
+
+# 添加模块
+pybind11_add_module(${MODULE_NAME} example.cpp)
+
+# 设置目标属性
+set_target_properties(${MODULE_NAME} PROPERTIES 
+    SUFFIX ".pyd"
+    # OUTPUT_NAME "mysql_example"  # 如果需要保持输出文件名为example.pyd
+)
+
+
+# add_executable(mysql_example example.cpp)###
+
+# # 链接库
+# target_link_libraries(${MODULE_NAME} PRIVATE 
+#     libmysql.lib
+#     ${Python_LIBRARY}
+# )
+
+#Windows 特定设置
+if(WIN32)####
+    # 链接 Windows 系统库
+    target_link_libraries(${MODULE_NAME} PRIVATE ####
+        kernel32.lib user32.lib gdi32.lib winspool.lib ####
+        shell32.lib ole32.lib oleaut32.lib uuid.lib ####
+        comdlg32.lib advapi32.lib)####
+    
+    # 复制 libmysql.dll
+    add_custom_command(TARGET ${MODULE_NAME} POST_BUILD####
+        # COMMAND ${CMAKE_COMMAND} -E copy_if_different
+        COMMAND ${CMAKE_COMMAND} -E copy####
+        # "C:/Program Files/MySQL/MySQL Server 8.0/lib/libmysql.dll"####
+        "F:/tauri2new/op-0.4.5.0/build/libop/Debug/op_x64.dll"#op
+        $<TARGET_FILE_DIR:${MODULE_NAME}>)####
+endif()####
+
+
+

@@ -1,0 +1,25 @@
+# 工具定义
+cxx = g++
+cflags = -Wall -Wextra -O2 -fPIC
+ldflags = -shared
+
+
+# 编译规则
+rule compile
+  command = $cxx $cflags -c $in -o $out
+  description = COMPILE $out
+
+# 链接规则
+rule link
+  command = $cxx $ldflags $in -o $out
+  description = LINK $out
+
+# 构建目标
+build ../../build/sine.o: compile sine.cpp
+build ../../build/sine.dll: link ../../build/sine.o
+
+# 默认目标
+default ../../build/sine.dll
+
+
+

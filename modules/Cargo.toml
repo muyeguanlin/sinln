@@ -1,0 +1,16 @@
+#maturin build --release
+[package]
+name = "modules"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "modules"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3 = { version = "0.24.0", features = ["extension-module"] }
+mysql = "*"  # 使用最新版本
+serde = { version = "1.0", features = ["derive"] }  # 用于序列化
+env_logger = "0.9"  # 实际输出日志到控制台
