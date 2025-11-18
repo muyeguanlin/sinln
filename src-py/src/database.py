@@ -7,7 +7,7 @@ import tomllib
 
 class DatabaseManager:
     def __init__(self):
-        with open('mysql.toml', 'rb') as mysql:
+        with open('resource/mysql.toml', 'rb') as mysql:
             toml = tomllib.load(mysql)  # config 是一个字典
         # toml = tomllib.load('mysql.toml')
         self.db_config = toml['database']

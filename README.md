@@ -1,22 +1,22 @@
-# Tauri + Vue + TypeScript
+## 上传到 github
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
-
-##创建本地仓库
 git config --global user.name "muyeguanlin"
 git config --global user.email "2390893447@qq.com"
 git init
 git status
 git add .
 git remote add origin https://github.com/muyeguanlin/sinln.git
+git commit -m "修复 Git 子仓库问题，添加所有项目文件"
 git push -u origin main
 
-## 我们已经在项目根目录建立了本地仓库，因为用户已经执行了 git init，并且看到了提示：Initialized empty Git repository in F:/study251011/sinln/.git/
+我们已经在项目根目录建立了本地仓库，因为用户已经执行了 git init，并且看到了提示：Initialized empty Git repository in F:/study251011/sinln/.git/
 
 ## 检查上传文件
 
 git status
+Remove-Item -Recurse -Force sinln\.git## 清除缓存
+
+## tauri
+
+更换 icon cargo tauri icon new-icon.png
+Prevents additional console window on Windows in release, DO NOT REMOVE!!
