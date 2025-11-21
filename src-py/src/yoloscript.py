@@ -34,7 +34,7 @@
         
 #         print("YOLO COM组件初始化完成")
     
-#     def start_detection(self, model_path=".resource/yolo12n.pt"):
+#     def start_detection(self, model_path="./resource/yolo12n.pt"):
 #         """开始检测"""
 #         print(f"start_detection 方法被调用，模型路径: {model_path}")
         
