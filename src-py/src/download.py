@@ -146,5 +146,3 @@ if __name__ == "__main__":
     downloader=BaiduImageDownloader()
     word_origin = input("请输入搜索内容：")
     asyncio.run(downloader.download_images(word_origin,80))
-
-

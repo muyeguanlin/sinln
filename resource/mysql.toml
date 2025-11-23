@@ -1,3 +1,86 @@
+
+#创建数据库
+# CREATE DATABASE [IF NOT EXISTS] database_name
+#   [CHARACTER SET charset_name]
+#   [COLLATE collation_name];
+
+#删除数据库
+# DROP DATABASE <database_name>;        -- 直接删除数据库，不检查是否存在
+# 或
+# DROP DATABASE [IF EXISTS] <database_name>;
+
+#连接数据库
+# mysql -h localhost -P 3306 -u root -pzst654321  #两个P为大写
+# SHOW DATABASES;
+# USE your_database;# 选择数据库
+# SHOW TABLES;
+#  EXIT;/QUIT;
+
+
+# 创建数据表
+# CREATE TABLE table_name (
+#  id INT AUTO_INCREMENT PRIMARY KEY,#AUTO_INCREMENT 关键字用于创建一个自增长的列，一般用于主键，数值会自动加 1。PRIMARY KEY 用于定义主键。
+#     column1 datatype,
+#     column2 datatype,
+#     ...
+# )CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;#创建一个使用 utf8mb4 字符集和 utf8mb4_general_ci 排序规则的表;
+
+# 删除表
+# DROP TABLE table_name;     -- 直接删除表，不检查是否存在
+# 或
+
+# DROP TABLE [IF EXISTS] table_name;  -- 会检查是否存在，如果存在则删除
+
+#TRUNCATE TABLE table_name;#只是想删除表中的所有数据，但保留表的结构
+
+# 修改数据表名或者修改数据表字段
+
+# ALTER TABLE old_table_name            修改表名
+# RENAME TO new_table_name;
+
+# ALTER TABLE table_name                添加列
+# ADD COLUMN new_column_name datatype;
+
+# ALTER TABLE table_name                添加 PRIMARY KEY
+# ADD PRIMARY KEY (column_name);
+
+
+# ALTER TABLE child_table               添加 FOREIGN KEY
+# ADD CONSTRAINT fk_name
+# FOREIGN KEY (column_name)
+# REFERENCES parent_table (column_name);
+
+
+# ALTER TABLE TABLE_NAME                修改列的数据类型
+# MODIFY COLUMN column_name new_datatype;
+
+# ALTER TABLE table_name                修改列名
+# CHANGE COLUMN old_column_name new_column_name datatype;
+
+# ALTER TABLE table_name                删除列
+# DROP COLUMN column_name;
+
+
+# #增删改查
+# INSERT INTO table_name (column1, column2, column3, ...)
+# VALUES (value1, value2, value3, ...);
+
+
+# DELETE FROM table_name WHERE condition;
+
+# UPDATE table_name SET column1 = value1, column2 = value2, ...
+# WHERE condition;
+
+
+# SELECT column1, column2, ...FROM table_name  name  WHERE name LIKE '%_java[^asdasf]'
+# REGEXP BINARY 'Smith|^item{n,m}[0-9]+.\w\s$;  使用 BINARY 关键字，使得匹配区分大小写：
+# REGEXP 'mar';包含 'mar' 字符
+# REGEXP  '(z|f)ood' 则匹配 "zood" 或 "food"。
+# [WHERE condition]
+# [ORDER BY column_name [ASC | DESC]]
+# [LIMIT number];
+#RLIKE 是 MySQL 中用于进行正则表达式匹配的运算符，与 REGEXP 是一样的，RLIKE 和 REGEXP 可以互换使用，没有区别。
+
 # mysql.toml
 [database]
 host = "localhost"

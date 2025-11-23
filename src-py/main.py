@@ -1028,68 +1028,101 @@
 #         print(tk);
 #         time.sleep(0.1)
 ##############################################################################################
-import win32gui
-import win32con
-import win32api
-import time
+# import win32gui
+# import win32con
+# import win32api
+# import time
 
-# 你的窗口句柄
-window_handle = 328276
+# # 你的窗口句柄
+# window_handle = 328276
 
-def send_key_to_window(hwnd, key_code):
-    """向指定窗口发送按键"""
-    # 确保窗口存在
-    if not win32gui.IsWindow(hwnd):
-        print("窗口不存在或句柄无效")
-        return False
+# def send_key_to_window(hwnd, key_code):
+#     """向指定窗口发送按键"""
+#     # 确保窗口存在
+#     if not win32gui.IsWindow(hwnd):
+#         print("窗口不存在或句柄无效")
+#         return False
     
-    # 发送按键消息
-    win32gui.PostMessage(hwnd, win32con.WM_KEYDOWN, key_code, 0)
-    time.sleep(0.05)  # 短暂延迟
-    win32gui.PostMessage(hwnd, win32con.WM_KEYUP, key_code, 0)
-    return True
+#     # 发送按键消息
+#     win32gui.PostMessage(hwnd, win32con.WM_KEYDOWN, key_code, 0)
+#     time.sleep(0.05)  # 短暂延迟
+#     win32gui.PostMessage(hwnd, win32con.WM_KEYUP, key_code, 0)
+#     return True
 
-def send_char_to_window(hwnd, char):
-    """向指定窗口发送字符"""
-    # 确保窗口存在
-    if not win32gui.IsWindow(hwnd):
-        print("窗口不存在或句柄无效")
-        return False
+# def send_char_to_window(hwnd, char):
+#     """向指定窗口发送字符"""
+#     # 确保窗口存在
+#     if not win32gui.IsWindow(hwnd):
+#         print("窗口不存在或句柄无效")
+#         return False
     
-    # 发送字符消息
-    win32gui.PostMessage(hwnd, win32con.WM_CHAR, ord(char), 0)
-    return True
+#     # 发送字符消息
+#     win32gui.PostMessage(hwnd, win32con.WM_CHAR, ord(char), 0)
+#     return True
 
-def send_mouse_click(hwnd, x, y):
-    """向指定窗口发送鼠标点击"""
-    # 确保窗口存在
-    if not win32gui.IsWindow(hwnd):
-        print("窗口不存在或句柄无效")
-        return False
+# def send_mouse_click(hwnd, x, y):
+#     """向指定窗口发送鼠标点击"""
+#     # 确保窗口存在
+#     if not win32gui.IsWindow(hwnd):
+#         print("窗口不存在或句柄无效")
+#         return False
     
-    # 将坐标转换为lParam格式
-    lParam = win32api.MAKELONG(x, y)
+#     # 将坐标转换为lParam格式
+#     lParam = win32api.MAKELONG(x, y)
     
-    # 发送鼠标按下和释放消息
-    win32gui.PostMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lParam)
-    time.sleep(0.05)
-    win32gui.PostMessage(hwnd, win32con.WM_LBUTTONUP, 0, lParam)
-    return True
+#     # 发送鼠标按下和释放消息
+#     win32gui.PostMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lParam)
+#     time.sleep(0.05)
+#     win32gui.PostMessage(hwnd, win32con.WM_LBUTTONUP, 0, lParam)
+#     return True
 
-# 使用示例
-if __name__ == "__main__":
-    # 发送按键
-    for _ in range(50):
-        send_key_to_window(window_handle, win32con.VK_SPACE)  # 空格键
-        # send_key_to_window(window_handle, win32con.VK_RETURN)  # 回车键
+# # 使用示例
+# if __name__ == "__main__":
+#     # 发送按键
+#     for _ in range(50):
+#         send_key_to_window(window_handle, win32con.VK_SPACE)  # 空格键
+#         # send_key_to_window(window_handle, win32con.VK_RETURN)  # 回车键
         
-        # 发送字符
-        send_char_to_window(window_handle, 'A')
-        send_char_to_window(window_handle, 'q')
-        send_char_to_window(window_handle, 'e')
+#         # 发送字符
+#         send_char_to_window(window_handle, 'A')
+#         send_char_to_window(window_handle, 'q')
+#         send_char_to_window(window_handle, 'e')
 
-        send_char_to_window(window_handle, 'r')
-        send_char_to_window(window_handle, 'c')
+#         send_char_to_window(window_handle, 'r')
+#         send_char_to_window(window_handle, 'c')
         
-    # 发送鼠标点击 (假设在窗口内的坐标100, 100处点击)
-    send_mouse_click(window_handle, 100, 100)
+#     # 发送鼠标点击 (假设在窗口内的坐标100, 100处点击)
+#     send_mouse_click(window_handle, 100, 100)
+#############################################################################################
+# def simple_generator():
+#     print("开始")
+#     yield [1,2,3,4]
+#     print("继续")
+#     yield [5,6,7,8]
+#     print("结束")
+
+# # 调用函数，不会打印任何东西，只是返回一个生成器对象
+# try:
+#     gen = simple_generator()
+
+#     # 第一次 next，执行到第一个 yield，打印“开始”，返回 1
+#     for _ in range(3):
+#         print(next(gen))       # 输出：1
+#       # 输出：1
+# except StopIteration:
+#     print("生成器已经结束")
+
+
+
+def generate_elements_from_list():
+    my_list = [1, 2, 3, 4, 5]
+    for item in my_list:
+        yield item
+try:
+# 使用
+    gen = generate_elements_from_list()
+    for _ in range(13):
+        print(next(gen)) # 依次输出 1, 2, 3, 4, 5
+
+except Exception as e:
+    print("生成器已经结束")
