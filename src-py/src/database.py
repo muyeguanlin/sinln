@@ -36,12 +36,13 @@ class DatabaseManager:
                 #     local_path = VALUES(local_path),
                 #     download_time = CURRENT_TIMESTAMP
                 # """
-           
-        
-   
-     
-                cursor.executemany(insert_sql, image_data)
                 # cursor.execute(self.sql_commands['delete_all'])
+                # cursor.execute(self.sql_commands['drop_table'])
+                # cursor.execute(self.sql_commands['create_table'])
+
+                cursor.executemany(insert_sql, image_data)
+                # cursor.execute(insert_sql, image_data)
+                
                 cursor.execute(self.sql_commands['select_all'])
             
             
@@ -89,14 +90,11 @@ class DatabaseManager:
                 
                 # print("用户数据修复和插入完成")
                 
-        except MySQLdb.Error as e:
-            print(f"数据库操作失败: {e}")
-            return False
+    
         except Exception as e:
             print(f"发生错误: {e}")
-            return False
-        return True
-    
+            
+      
     # 可以添加其他数据库操作方法
     def execute_query(self, query, params=None):
         """执行查询"""
@@ -109,7 +107,7 @@ class DatabaseManager:
         except MySQLdb.Error as e:
             print(f"查询执行失败: {e}")
             return None
-        
+    # def close(self):
 
 
             

@@ -9,11 +9,11 @@ git add .
 
 # 3. 提交更改
 
-git commit -m "feat: 实现购物车商品数量限制功能"
+git commit -m "feat: mysql 语句一"
 
 类型 说明 示例
 feat 新功能 feat: 添加用户注册功能
-fix 修复 bug fix: 修复登录页面的崩溃问题
+fix 修复 bug fix: 修复登录页面的崩溃问题  
 docs 文档更新 docs: 更新 API 接口文档
 style 代码格式调整 style: 调整代码缩进
 refactor 重构代码 refactor: 重构用户验证逻辑

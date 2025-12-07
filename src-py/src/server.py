@@ -27,7 +27,7 @@
 #         self.user_sessions = {}
 #         self.basedir = basedir or os.path.join(os.path.dirname(__file__), 'dist')
 #         self.app.route('/static/<filename:path>')(self.serve_static)
-#         self.app.route('/api/user/menu', method=['GET', 'OPTIONS'])(self._enable_cors(self.user_menu))
+#         self.app   .route('/api/user/menu', method=['GET', 'OPTIONS'])(self._enable_cors(self.user_menu))
 #         self.app.route('/api/user/logout', method=['POST', 'OPTIONS'])(self._ena ble_cors(self.user_logout))
 #         self.app.route('/api/user/login', method=['POST', 'OPTIONS'])(self._enable_cors(self.user_login))
 #         self.app.route('/api/user/info', method=['GET',s 'OPTIONS'])(self._enable_corws(self.user_info))

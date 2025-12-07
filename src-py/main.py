@@ -891,79 +891,79 @@
 
 # download  --database.py
 #########################################################################################
-# # pip install -r requirements.txt
-# # playwright install
+# pip install -r requirements.txt
+# playwright install
 
-# import asyncio
-# import logging
-# # from mod.download import BaiduImageDownloader
-# # from mod.database import DatabaseManager
+import asyncio
+import logging
+# from mod.download import BaiduImageDownloader
+# from mod.database import DatabaseManager
 
-# from src import BaiduImageDownloader,DatabaseManager
+from src import BaiduImageDownloader,DatabaseManager
 
-# # import mod
-# # downloader = mod.BaiduImageDownloader()
+# import mod
+# downloader = mod.BaiduImageDownloader()
 
-# # 配置日志
+# 配置日志
 
 
 
 
     
-# async def runxxxx(keywords: list, max_images_per_keyword: int):
-#     """运行下载程序"""
-#     try:
-#         # 连接数据库
+async def runxxxx(keywords: list, max_images_per_keyword: int):
+    """运行下载程序"""
+    try:
+        # 连接数据库
        
         
-#         for word_origin in keywords:
-#             print(f"正在搜索和下载关键词: {word_origin}")
+        for word_origin in keywords:
+            print(f"正在搜索和下载关键词: {word_origin}")
             
-#             # 下载图片
-#             downloaded_images = await downloader.download_images(
-#                 word_origin, max_images_per_keyword
-#             )
-#             # print(downloaded_images)
-#             if downloaded_images:
-#                 # 保存到数据库
-#                 success = db_manager.fix_and_insert_user(downloaded_images)
-#                 if success:
-#                     print(f"关键词 '{word_origin}' 处理完成，成功下载 {len(downloaded_images)} 张图片")
-#                 else:
-#                     print(f"关键词 '{word_origin}' 图片下载成功但数据库保存失败")
-#             else:
-#                 print(f"关键词 '{word_origin}' 未找到图片")
+            # 下载图片
+            downloaded_images = await downloader.download_images(
+                word_origin, max_images_per_keyword
+            )
+            # print(downloaded_images)
+            if downloaded_images:
+                # 保存到数据库
+                success = db_manager.fix_and_insert_user(downloaded_images)
+                if success:
+                    print(f"关键词 '{word_origin}' 处理完成，成功下载 {len(downloaded_images)} 张图片")
+                else:
+                    print(f"关键词 '{word_origin}' 图片下载成功但数据库保存失败")
+            else:
+                print(f"关键词 '{word_origin}' 未找到图片")
             
-#             # 短暂延迟，避免请求过于频繁
-#             await asyncio.sleep(2)
+            # 短暂延迟，避免请求过于频繁
+            await asyncio.sleep(2)
 
         
       
-#     except Exception as e:
-#         logging.error(f"程序运行出错: {e}")
-#     finally:
-#         # 关闭数据库连接
-#         self.db_manager.close()
+    except Exception as e:
+        logging.error(f"程序运行出错: {e}")
+    # finally:
+    #     # 关闭数据库连接
+    #     db_manager.close()
 
 
    
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
     
 
-#     downloader = BaiduImageDownloader()
-#     db_manager = DatabaseManager()
+    downloader = BaiduImageDownloader()
+    db_manager = DatabaseManager()
 
 
-#     # 搜索关键词列表
-#     searchword=input("请输入搜索关键字：")
-#     keywords = ['秦时明月',searchword]
+    # 搜索关键词列表
+    searchword=input("请输入搜索关键字：")
+    keywords = [searchword]
     
-#     # 创建应用实例并运行
+    # 创建应用实例并运行
   
     
-#     # 运行异步主程序
-#     asyncio.run(runxxxx(keywords, max_images_per_keyword=50))
+    # 运行异步主程序
+    asyncio.run(runxxxx(keywords, max_images_per_keyword=50))
 
 
 #####################################################################################################
@@ -1027,102 +1027,3 @@
 #         tk=ts.KeyPress(x)
 #         print(tk);
 #         time.sleep(0.1)
-##############################################################################################
-# import win32gui
-# import win32con
-# import win32api
-# import time
-
-# # 你的窗口句柄
-# window_handle = 328276
-
-# def send_key_to_window(hwnd, key_code):
-#     """向指定窗口发送按键"""
-#     # 确保窗口存在
-#     if not win32gui.IsWindow(hwnd):
-#         print("窗口不存在或句柄无效")
-#         return False
-    
-#     # 发送按键消息
-#     win32gui.PostMessage(hwnd, win32con.WM_KEYDOWN, key_code, 0)
-#     time.sleep(0.05)  # 短暂延迟
-#     win32gui.PostMessage(hwnd, win32con.WM_KEYUP, key_code, 0)
-#     return True
-
-# def send_char_to_window(hwnd, char):
-#     """向指定窗口发送字符"""
-#     # 确保窗口存在
-#     if not win32gui.IsWindow(hwnd):
-#         print("窗口不存在或句柄无效")
-#         return False
-    
-#     # 发送字符消息
-#     win32gui.PostMessage(hwnd, win32con.WM_CHAR, ord(char), 0)
-#     return True
-
-# def send_mouse_click(hwnd, x, y):
-#     """向指定窗口发送鼠标点击"""
-#     # 确保窗口存在
-#     if not win32gui.IsWindow(hwnd):
-#         print("窗口不存在或句柄无效")
-#         return False
-    
-#     # 将坐标转换为lParam格式
-#     lParam = win32api.MAKELONG(x, y)
-    
-#     # 发送鼠标按下和释放消息
-#     win32gui.PostMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lParam)
-#     time.sleep(0.05)
-#     win32gui.PostMessage(hwnd, win32con.WM_LBUTTONUP, 0, lParam)
-#     return True
-
-# # 使用示例
-# if __name__ == "__main__":
-#     # 发送按键
-#     for _ in range(50):
-#         send_key_to_window(window_handle, win32con.VK_SPACE)  # 空格键
-#         # send_key_to_window(window_handle, win32con.VK_RETURN)  # 回车键
-        
-#         # 发送字符
-#         send_char_to_window(window_handle, 'A')
-#         send_char_to_window(window_handle, 'q')
-#         send_char_to_window(window_handle, 'e')
-
-#         send_char_to_window(window_handle, 'r')
-#         send_char_to_window(window_handle, 'c')
-        
-#     # 发送鼠标点击 (假设在窗口内的坐标100, 100处点击)
-#     send_mouse_click(window_handle, 100, 100)
-#############################################################################################
-# def simple_generator():
-#     print("开始")
-#     yield [1,2,3,4]
-#     print("继续")
-#     yield [5,6,7,8]
-#     print("结束")
-
-# # 调用函数，不会打印任何东西，只是返回一个生成器对象
-# try:
-#     gen = simple_generator()
-
-#     # 第一次 next，执行到第一个 yield，打印“开始”，返回 1
-#     for _ in range(3):
-#         print(next(gen))       # 输出：1
-#       # 输出：1
-# except StopIteration:
-#     print("生成器已经结束")
-
-
-
-def generate_elements_from_list():
-    my_list = [1, 2, 3, 4, 5]
-    for item in my_list:
-        yield item
-try:
-# 使用
-    gen = generate_elements_from_list()
-    for _ in range(13):
-        print(next(gen)) # 依次输出 1, 2, 3, 4, 5
-
-except Exception as e:
-    print("生成器已经结束")

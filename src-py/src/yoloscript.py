@@ -100,6 +100,7 @@ class YOLOCOMComponent:
 if __name__ == '__main__':
     # win32com.server.register.UseCommandLine(YOLOCOMComponent)
     yo=YOLOCOMComponent()
-    for _ in range(100):
+    for _ in range(1000):
         x=yo.FindObject("person", "0,0,1260,720")
         print(f"查询到{x}个结果——————————————————")
+        time.sleep(1)

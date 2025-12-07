@@ -3,7 +3,11 @@ import os
 import aiohttp
 import asyncio
 from urllib import parse #用perse.quote 方法必须引入
-from playwright.async_api import async_playwright
+# from playwright.async_api import async_playwright
+
+
+from playwright_stealth import stealth_sync  # 或者playwright-stealth
+
 
 # import logging
 
@@ -42,11 +46,12 @@ class BaiduImageDownloader:
         """
         async with async_playwright() as p:        
             # browser = await p.chromium.launch(headless=False)
-            browser = await p.chromium.launch(headless=True)
+            browser = await p.chromium.launch(headless=False)
             # page = await browser.new_page()#简单场景
 
             context = await browser.new_context()
             page = await context.new_page()
+            stealth_sync(page)
 
             # await page.goto("https://www.pexels.com/zh-cn/search/鲜花/",timeout=60000)
             # word_origin = input("请输入搜索内容：")
@@ -56,17 +61,29 @@ class BaiduImageDownloader:
             # await page.goto(http_url,timeout=6000)
 
             # 访问百度图片
-            await page.goto("https://image.baidu.com/")
-            # await page.goto("https://www.taobao.com/wow/z/tbhome/pcsem/alimama?refpid=mm_2898300158_3078300397_115665800437&keyword=%E6%B7%98%E5%AE%9D&bc_fl_src=tbsite_T9W2LtnM&channelSrp=bingSomama&msclkid=a4a83b81eb3210d11c9d53fb57b8ebc7&clk1=940a383ff07244828296edc9876d50ab&upsId=940a383ff07244828296edc9876d50ab")
+            # await page.goto("https://image.baidu.com/")
+            # # await page.goto("https://www.taobao.com/wow/z/tbhome/pcsem/alimama?refpid=mm_2898300158_3078300397_115665800437&keyword=%E6%B7%98%E5%AE%9D&bc_fl_src=tbsite_T9W2LtnM&channelSrp=bingSomama&msclkid=a4a83b81eb3210d11c9d53fb57b8ebc7&clk1=940a383ff07244828296edc9876d50ab&upsId=940a383ff07244828296edc9876d50ab")
 
-            print("已打开百度图片")
+            # print("已打开百度图片")
 
-            # 输入搜索关键词
-            # await page.fill("#image-search-input", word_origin)
-            await page.fill('input[name="word"]', word_origin)
-            # await page.fill('input[name="q"]', word_origin)
-            await page.press("#image-search-input", "Enter")
-            # await page.press('input[name="q"]', "Enter")
+            # # 输入搜索关键词
+            # # await page.fill("#image-search-input", word_origin)
+            # await page.fill('input[name="word"]', word_origin)#标签类型+id定位
+            # # await page.fill('input[name="q"]', word_origin)
+            # await page.press("#image-search-input", "Enter")#直接id定位
+            # # await page.press('input[name="q"]', "Enter")
+
+            #阿里巴巴
+            await page.goto("https://www.1688.com/zw/hamlet.html?scene=2&keywords=%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4&cosite=bingjj&trackid=885235714308742809168995&format=normal&location=landing_t4&m_k=82533176094889&m_a=1320515787216775&m_p=519835145&m_clk=07f7ef37c6e5128c89798619180fd93f&m_c=82532463471873&m_q=%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4&m_mt=be&m_ep=e&m_o=82533176094889&m_site=o&d27=c&m_cext=&m_aud=kwd-82533176094889:loc-39&msclkid=07f7ef37c6e5128c89798619180fd93f")
+            await page.fill("#alisearch-keywords", word_origin, timeout=60000)
+            await page.press('button[id="alisearch-submit"]', "Enter")
+
+
+
+
+
+
+
             await page.wait_for_load_state("networkidle")
             print("已提交搜索")
 
@@ -85,8 +102,9 @@ class BaiduImageDownloader:
             # # 等待图片加载
             await page.wait_for_selector("img[src]", timeout=6000)
             # img_elements = await page.query_selector_all("img[src]")
-            img_elements = await page.locator("img[src]").all()  # 创建定位器 locator 对动态页面更棒：page.locator() 不需要 await，但加上.all（）就是异步的
-            # a_elements = await page.query_selector_all("img[src]")
+            # img_elements = await page.locator("#offer-img img").all()
+            img_elements = await page.locator("img[src]").all() 
+           
 
             # if img_elements:
             #     print("悬浮在第一张图片上...")
@@ -97,7 +115,7 @@ class BaiduImageDownloader:
             scroll_pause_time = 2  # 滚动等待时间
             img_urls =set()  # 使用集合去重
 
-            while len(img_urls) < max_images:
+            while len(img_urls) <max_images:
                 # a_elements = await page.query_selector_all("a[download]")
                 # for img in a_elements:
                 for img in img_elements:
@@ -106,12 +124,9 @@ class BaiduImageDownloader:
                     data_src = await img.get_attribute("data-src")
                 # # 优先使用data-src（懒加载图片）
                     url = data_src or src
-                    # print(url)
+                    print(url)
                     if url and url.startswith("http"):
                         img_urls.add(url)
-                    
-
-
 
                 await page.mouse.wheel(0, 1000)  # 异步滚动
                 await asyncio.sleep(scroll_pause_time)  # 异步等待
